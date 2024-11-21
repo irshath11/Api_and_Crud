@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:api_pagination_task/model/photo_screen_model.dart';
 import 'package:flutter/material.dart';
 import '../helpers/api_service.dart';
 
@@ -10,7 +11,7 @@ class PhotoScreen extends StatefulWidget {
 }
 
 class _PhotoScreenState extends State<PhotoScreen> {
-  List photos = [];
+  List<PhotoScreenModel> photos = [];  // List of Photo objects
   int start = 0;
   final int limit = 10;
   bool isLoading = false;
@@ -33,7 +34,6 @@ class _PhotoScreenState extends State<PhotoScreen> {
       setState(() {
         start += limit;
         photos.addAll(newPhotos);
-        log("photos::: ${photos.toList()}");
       });
     } finally {
       setState(() => isLoading = false);
@@ -77,10 +77,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                       if (index < photos.length) {
                         final photo = photos[index];
                         if (searchQuery.isNotEmpty &&
-                            !photo['title']
-                                .toString()
-                                .toLowerCase()
-                                .contains(searchQuery.toLowerCase())) {
+                            !photo.title.toLowerCase().contains(searchQuery.toLowerCase())) {
                           return const SizedBox.shrink();
                         }
                         return Padding(
@@ -94,14 +91,14 @@ class _PhotoScreenState extends State<PhotoScreen> {
                               contentPadding: const EdgeInsets.all(16),
                               leading: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
-                                child: Image.network(photo['thumbnailUrl'], width: 50, height: 50, fit: BoxFit.cover),
+                                child: Image.network(photo.thumbnailUrl, width: 50, height: 50, fit: BoxFit.cover),
                               ),
                               title: Text(
-                                photo['title'],
+                                photo.title,
                                 style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                               subtitle: Text(
-                                'ID: ${photo['id']}',
+                                'ID: ${photo.id}',
                                 style: TextStyle(color: Colors.grey.shade600),
                               ),
                             ),
@@ -115,12 +112,13 @@ class _PhotoScreenState extends State<PhotoScreen> {
                                 child: ElevatedButton(
                                   onPressed: fetchMorePhotos,
                                   style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.cyan,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     padding: const EdgeInsets.symmetric(vertical: 12),
                                   ),
-                                  child: const Text("Load More", style: TextStyle(fontSize: 16)),
+                                  child: const Text("Load More", style: TextStyle(fontSize: 16, color: Colors.black)),
                                 ),
                               );
                       }

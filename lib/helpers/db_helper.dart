@@ -1,3 +1,4 @@
+import 'package:api_pagination_task/model/product_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -34,19 +35,25 @@ class DatabaseHelper {
     );
   }
 
-  Future<int> insertProduct(Map<String, dynamic> product) async {
+  Future<int> insertProduct(ProductModel product) async {
     final db = await database;
-    return await db.insert('products', product);
+    return await db.insert('products', product.toMap());
   }
 
-  Future<List<Map<String, dynamic>>> getProducts() async {
+  Future<List<ProductModel>> getProducts() async {
     final db = await database;
-    return await db.query('products');
+    final List<Map<String, dynamic>> maps = await db.query('products');
+    return List.generate(maps.length, (i) => ProductModel.fromMap(maps[i]));
   }
 
-  Future<int> updateProduct(int id, Map<String, dynamic> product) async {
+  Future<int> updateProduct(ProductModel product) async {
     final db = await database;
-    return await db.update('products', product, where: 'id = ?', whereArgs: [id]);
+    return await db.update(
+      'products',
+      product.toMap(),
+      where: 'id = ?',
+      whereArgs: [product.id],
+    );
   }
 
   Future<int> deleteProduct(int id) async {

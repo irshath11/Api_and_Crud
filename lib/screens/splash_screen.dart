@@ -33,18 +33,21 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-                'https://w7.pngwing.com/pngs/185/850/png-transparent-task-computer-icons-tasks-s-angle-text-microsoft-office-thumbnail.png',
-                height: 100),
-            const SizedBox(height: 20),
             const CircularProgressIndicator(),
             const SizedBox(height: 30),
-            const Text(
-              'Tasks...',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+            Container(
+              height: 50,
+              width: MediaQuery.of(context).size.width * 0.7,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
+              child: const Center(
+                child: Text(
+                  'Tasks Application',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
           ],
         ),

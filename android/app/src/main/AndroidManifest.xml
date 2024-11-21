@@ -6,7 +6,7 @@
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
-            android:name=".MainActivity"
+            android:name="Task Apk"
             android:exported="true"
             android:launchMode="singleTop"
             android:taskAffinity=""

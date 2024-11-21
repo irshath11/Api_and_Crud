@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:api_pagination_task/helpers/db_helper.dart';
+import 'package:api_pagination_task/model/product_model.dart';
+import 'package:flutter/material.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -10,7 +11,7 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   final DatabaseHelper _dbHelper = DatabaseHelper();
-  List<Map<String, dynamic>> _products = [];
+  List<ProductModel> _products = [];
 
   @override
   void initState() {
@@ -25,13 +26,13 @@ class _ProductScreenState extends State<ProductScreen> {
     });
   }
 
-  void _showProductForm({Map<String, dynamic>? product}) {
-    final nameController = TextEditingController(text: product?['name']);
+  void _showProductForm({ProductModel? product}) {
+    final nameController = TextEditingController(text: product?.name);
     final priceController = TextEditingController(
-      text: product != null ? product['price'].toString() : '',
+      text: product != null ? product.price.toString() : '',
     );
     final descriptionController =
-        TextEditingController(text: product?['description']);
+        TextEditingController(text: product?.description);
 
     showDialog(
       context: context,
@@ -91,17 +92,18 @@ class _ProductScreenState extends State<ProductScreen> {
                 final description = descriptionController.text;
 
                 if (product == null) {
-                  await _dbHelper.insertProduct({
-                    'name': name,
-                    'price': price,
-                    'description': description,
-                  });
+                  await _dbHelper.insertProduct(
+                    ProductModel(name: name, price: price, description: description),
+                  );
                 } else {
-                  await _dbHelper.updateProduct(product['id'], {
-                    'name': name,
-                    'price': price,
-                    'description': description,
-                  });
+                  await _dbHelper.updateProduct(
+                    ProductModel(
+                      id: product.id,
+                      name: name,
+                      price: price,
+                      description: description,
+                    ),
+                  );
                 }
 
                 Navigator.pop(context);
@@ -151,19 +153,19 @@ class _ProductScreenState extends State<ProductScreen> {
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     child: ExpansionTile(
                       title: Text(
-                        product['name'],
+                        product.name,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       subtitle: Text(
-                        '₹${product['price'].toStringAsFixed(2)}',
+                        '₹${product.price.toStringAsFixed(2)}',
                         style: const TextStyle(color: Colors.green),
                       ),
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Text(
-                            "Description: ${product['description']}" ?? 'No description provided',
+                            "Description: ${product.description ?? 'No description provided'}",
                             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                           ),
                         ),
@@ -176,7 +178,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             ),
                             IconButton(
                               icon: const Icon(Icons.delete, color: Colors.red),
-                              onPressed: () => _deleteProduct(product['id']),
+                              onPressed: () => _deleteProduct(product.id!),
                             ),
                           ],
                         ),
