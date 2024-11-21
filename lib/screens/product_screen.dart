@@ -79,13 +79,15 @@ class _ProductScreenState extends State<ProductScreen> {
           ),
           actions: [
             TextButton(
+              
               onPressed: () => Navigator.pop(context),
               child: const Text(
                 'Cancel',
-                style: TextStyle(color: Colors.red),
+                style: TextStyle(color: Colors.cyan),
               ),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.cyan),
               onPressed: () async {
                 final name = nameController.text;
                 final price = double.tryParse(priceController.text) ?? 0.0;
@@ -109,7 +111,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 Navigator.pop(context);
                 _loadProducts();
               },
-              child: const Text('Save'),
+              child: const Text('Save', style: TextStyle(color: Colors.black),),
             ),
           ],
         );
