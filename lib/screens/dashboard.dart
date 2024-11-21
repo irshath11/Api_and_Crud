@@ -1,4 +1,5 @@
 import 'package:api_pagination_task/screens/photo_section.dart';
+import 'package:api_pagination_task/screens/product_section.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         children: [
           buttonSection("API Section", photoSectionNavigation),
           SizedBox(height: MediaQuery.of(context).size.height * 0.025),
-          buttonSection("CRUD Section", photoSectionNavigation)
+          buttonSection("CRUD Section", productSectionNavigation)
         ],
       ),
     );
@@ -43,7 +44,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   photoSectionNavigation() {
     return Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const PhotosSection()),
+      MaterialPageRoute(builder: (context) => const PhotoScreen()),
+    );
+  }
+
+  productSectionNavigation() {
+    return Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ProductScreen()),
     );
   }
 }

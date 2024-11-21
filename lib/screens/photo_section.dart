@@ -3,14 +3,14 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import '../helpers/api_service.dart';
 
-class PhotosSection extends StatefulWidget {
-  const PhotosSection({super.key});
+class PhotoScreen extends StatefulWidget {
+  const PhotoScreen({super.key});
 
   @override
-  _PhotosSectionState createState() => _PhotosSectionState();
+  _PhotoScreenState createState() => _PhotoScreenState();
 }
 
-class _PhotosSectionState extends State<PhotosSection> {
+class _PhotoScreenState extends State<PhotoScreen> {
   List photos = [];
   int start = 0;
   final int limit = 10;

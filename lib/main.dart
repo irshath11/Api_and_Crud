@@ -1,4 +1,4 @@
-import 'package:api_pagination_task/screens/dashboard.dart';
+import 'package:api_pagination_task/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const DashboardScreen(),
+      home: const SplashScreen(),
     );
   }
 }
