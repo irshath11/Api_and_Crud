@@ -1,5 +1,5 @@
-import 'package:api_pagination_task/screens/photo_section.dart';
-import 'package:api_pagination_task/screens/product_section.dart';
+import 'package:api_pagination_task/screens/photo_screen.dart';
+import 'package:api_pagination_task/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -13,7 +13,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey,
+      color: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -32,6 +32,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: ElevatedButton(
               onPressed: ontap,
               style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.cyan,
                 shadowColor: Colors.grey,
                 elevation: 5,
               ),
