@@ -11,7 +11,7 @@ class PhotoScreen extends StatefulWidget {
 }
 
 class _PhotoScreenState extends State<PhotoScreen> {
-  List<PhotoScreenModel> photos = [];  // List of Photo objects
+  List<PhotoScreenModel> photos = [];
   int start = 0;
   final int limit = 10;
   bool isLoading = false;

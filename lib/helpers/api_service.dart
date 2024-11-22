@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:api_pagination_task/model/photo_screen_model.dart';
 import 'package:http/http.dart' as http;
 
